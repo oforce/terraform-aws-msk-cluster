@@ -200,4 +200,12 @@ resource "aws_msk_cluster" "this" {
   }
 
   tags = var.tags
+
+  # Work-around for https://github.com/hashicorp/terraform-provider-aws/issues/24914
+  ## If you need to force a change, comment this block out from the downloaded module
+  lifecycle {
+    ignore_changes = [
+      client_authentication,
+    ]
+  }
 }
